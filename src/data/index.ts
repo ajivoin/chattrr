@@ -14,7 +14,11 @@ class Data {
   }
 
   public clearMessagesForUser(guildId: string, channelId: string, userId: string): void {
-    this.getGuild(guildId).getChannel(channelId).getUser(userId).messages = [];
+    this.getUser(guildId, channelId, userId).messages = [];
+  }
+
+  public clearSystemMessageForUser(guildId: string, channelId: string, userId: string): void {
+    this.getUser(guildId, channelId, userId).systemMessage = undefined;
   }
 
   public getGuild(guildId: string): Guild {
@@ -39,6 +43,11 @@ class Data {
     const user = this.getUser(guildId, channelId, userId);
     user.messages.push(new Message(role, message));
   };
+
+  public addSystemMessage(guildId: string, channelId: string, userId: string, message: string): void {
+    const user = this.getUser(guildId, channelId, userId);
+    user.systemMessage = message;
+  }
 }
 
 const Database = new Data();

@@ -8,7 +8,11 @@ const ClearCommand = new Command(
     .setDescription("Clears your conversation history."),
   async (interaction: CommandInteraction) => {
     await interaction.deferReply();
-    Database.clearMessagesForUser(interaction.guildId!, interaction.channelId, interaction.user.id);
+    const guildId = interaction.guildId!;
+    const channelId = interaction.channelId;
+    const userId = interaction.user.id;
+    Database.clearMessagesForUser(guildId, channelId, userId);
+    Database.clearSystemMessageForUser(guildId, channelId, userId);
     await interaction.followUp("Your conversation history is cleared. ChatGPT has no clue who you are anymore.");
   }
 );
