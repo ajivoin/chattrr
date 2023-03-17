@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node --loader ts-node/esm src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pm2": "pm2 start build/src/index.js --watch -i max --name chattrr",
+    "pm2": "pm2 startOrReload build/src/index.js --watch -i max --name chattrr",
     "build": "rm -rf build && tsc -p tsconfig.json"
   },
   "author": "",
