@@ -36,7 +36,7 @@ class Data {
     if (!this.guilds.has(guildId)) {
       this.guilds.set(guildId, new Guild(guildId));
     }
-    return this.getUser(guildId, channelId, userId).messages;
+    return this.getUser(guildId, channelId, userId).getMessages();
   }
 
   public addMessage(guildId: string, channelId: string, userId: string, role: string, message: string): void {

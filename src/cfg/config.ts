@@ -1,3 +1,1 @@
-import { token, openAIKey } from '../../bot.json';
-
-export { token, openAIKey };
+export { token, openAIKey, guild } from '../../bot.json';

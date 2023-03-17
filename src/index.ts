@@ -1,5 +1,5 @@
 import { ActivityType, Client, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder } from 'discord.js';
-import { token } from './cfg/config';
+import { token, guild } from './cfg/config';
 import { Commands } from './commands';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -9,7 +9,7 @@ client.once(Events.ClientReady, c => {
   const rest = new REST({ version: "10" }).setToken(token);
   const commandArray = [...Commands.values()].map(c => c.data.toJSON());
   rest.put(
-    Routes.applicationGuildCommands(client.user!.id, "634472861872029717"),
+    Routes.applicationGuildCommands(client.user!.id, guild),
     { body: commandArray }
   );
 
