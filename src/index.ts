@@ -1,4 +1,4 @@
-import { ActivityType, Client, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder } from 'discord.js';
+import { ActivityType, Client, Events, GatewayIntentBits, REST, Routes } from 'discord.js';
 import { token, guild } from './cfg/config';
 import { Command, Commands, } from './commands';
 
