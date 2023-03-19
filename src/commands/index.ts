@@ -8,4 +8,4 @@ Commands.set(ChatCommand.data.name, ChatCommand);
 Commands.set(ClearCommand.data.name, ClearCommand);
 Commands.set(SystemCommand.data.name, SystemCommand);
 
-export { Commands };
+export { Command, Commands };

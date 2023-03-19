@@ -1,6 +1,6 @@
 import { ActivityType, Client, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder } from 'discord.js';
 import { token, guild } from './cfg/config';
-import { Commands } from './commands';
+import { Command, Commands, } from './commands';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -18,7 +18,7 @@ client.once(Events.ClientReady, c => {
 
 client.on(Events.InteractionCreate, async interaction => {
   if (!interaction.isChatInputCommand()) return;
-  const command: { data: SlashCommandBuilder, execute: Function; } = Commands.get(interaction.commandName) as { data: SlashCommandBuilder, execute: Function; };
+  const command: Command = Commands.get(interaction.commandName)!;
   if (!command) return;
 
   try {
