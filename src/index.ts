@@ -1,5 +1,5 @@
-import { ActivityType, Client, Events, GatewayIntentBits, REST, Routes } from 'discord.js';
-import { token, guild } from './cfg/config';
+import { ActivityType, Client, Events, GatewayIntentBits } from 'discord.js';
+import { token } from './cfg/config';
 import { Command, Commands, } from './commands';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
