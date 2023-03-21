@@ -7,7 +7,9 @@
     "start": "node --loader ts-node/esm src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pm2": "pm2 startOrReload build/src/index.js --watch -i max --name chattrr",
-    "build": "rm -rf build && tsc -p tsconfig.json"
+    "build": "rm -rf build && tsc -p tsconfig.json",
+    "deployGlobalCommands": "node --loader ts-node/esm src/scripts/deployCommands.ts",
+    "deleteConfiguredGuildCommands": "node --loader ts-node/esm src/scripts/deleteCommandsFromGuild.ts"
   },
   "author": "",
   "license": "ISC",

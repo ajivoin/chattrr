@@ -6,12 +6,6 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once(Events.ClientReady, c => {
   console.log(`Ready! Logged in as ${ c.user.tag }`);
-  const rest = new REST({ version: "10" }).setToken(token);
-  const commandArray = [...Commands.values()].map(c => c.data.toJSON());
-  rest.put(
-    Routes.applicationGuildCommands(client.user!.id, guild),
-    { body: commandArray }
-  );
 
   client.user!.setActivity("/chat | /clear", { type: ActivityType.Listening });
 });
