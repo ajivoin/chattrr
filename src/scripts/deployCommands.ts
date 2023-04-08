@@ -1,6 +1,6 @@
 import { REST, Routes } from 'discord.js';
 import { clientId, token } from '../../bot.json';
-import { Commands } from '.';
+import { Commands } from '../commands';
 
 
 // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
