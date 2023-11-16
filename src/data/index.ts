@@ -36,7 +36,7 @@ class Data {
     if (!this.guilds.has(guildId)) {
       this.guilds.set(guildId, new Guild(guildId));
     }
-    return this.getUser(guildId, channelId, userId).getMessages().filter((msg) => msg.model === model);
+    return this.getUser(guildId, channelId, userId).getMessages().filter((msg) => msg.model === model || msg.role === "system");
   }
 
   public addMessage(model: string, guildId: string, channelId: string, userId: string, role: string, message: string): void {

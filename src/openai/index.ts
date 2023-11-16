@@ -44,8 +44,7 @@ const classicChat = async (message: string, guildId: string, channelId: string, 
   Database.addMessage("classic", guildId, channelId, userId, "user", message);
   const res = await api.createChatCompletion({
     model: "gpt-3.5-turbo-1106",
-    messages: [],
-
+    messages: [{ role: "system", content: "You are to respond as if you were an early version of GPT-3." }] as ChatCompletionRequestMessage[],
   });
   if (res.status != 200) {
     console.error(`OpenAI returned an error:`);
