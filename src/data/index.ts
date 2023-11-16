@@ -32,11 +32,11 @@ class Data {
   /**
    * getRelevantMessages
    */
-  public getRelevantMessages(guildId: string, channelId: string, userId: string): Message[] {
+  public getRelevantMessages(model: string, guildId: string, channelId: string, userId: string): Message[] {
     if (!this.guilds.has(guildId)) {
       this.guilds.set(guildId, new Guild(guildId));
     }
-    return this.getUser(guildId, channelId, userId).getMessages();
+    return this.getUser(guildId, channelId, userId).getMessages().filter((msg) => msg.model === model);
   }
 
   public addMessage(model: string, guildId: string, channelId: string, userId: string, role: string, message: string): void {
