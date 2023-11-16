@@ -40,19 +40,17 @@ const chatGpt3_5 = async (message: string, guildId: string, channelId: string, u
   return content;
 };
 
-const classicChat = async (message: string, guildId: string, channelId: string, userId: string): Promise<string> => {
-  Database.addMessage("classic", guildId, channelId, userId, "user", message);
+const classicChat = async (message: string): Promise<string> => {
   const res = await api.createChatCompletion({
     model: "gpt-3.5-turbo-1106",
-    messages: [{ role: "system", content: "You are to respond as if you were an early version of GPT-3." }] as ChatCompletionRequestMessage[],
+    messages: [{ role: "user", content: message }] as ChatCompletionRequestMessage[],
   });
   if (res.status != 200) {
     console.error(`OpenAI returned an error:`);
     console.error(res);
     return "";
   }
-  const { content, role } = res.data.choices[0].message!;
-  Database.addMessage("classic", guildId, channelId, userId, role, content);
+  const { content } = res.data.choices[0].message!;
   return content;
 };
 

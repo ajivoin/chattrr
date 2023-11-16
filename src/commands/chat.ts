@@ -80,10 +80,7 @@ const ClassicChatCommand = new Command(
     await interaction.deferReply({ ephemeral: false });
 
     const userMessage: string = interaction.options.get("prompt", true).value as string;
-    const guildId = interaction.guildId!;
-    const channelId = interaction.channelId;
-    const userId = interaction.user.id;
-    const responseMessage = await classicChat(userMessage, guildId, channelId, userId);
+    const responseMessage = await classicChat(userMessage);
     const discordMessage = `> ${ userMessage }\n${ responseMessage }`;
     const chunks = chunkSubstr(discordMessage, 1900);
     chunks.forEach(async chunk => {
