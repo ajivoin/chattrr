@@ -32,8 +32,9 @@ const ChatGptCommand3_5 = new Command(
     const responseMessage = await chatGpt3_5(userMessage, guildId, channelId, userId);
     const discordMessage = `> ${ userMessage }\n${ responseMessage }`;
     const chunks = chunkSubstr(discordMessage, 1900);
-    chunks.forEach(async chunk => {
+    chunks.forEach(async (chunk, i) => {
       if (chunk != "") {
+        if (i > 0) await new Promise(r => setTimeout(r, 1 / 2 * 1000));
         await interaction.followUp({ content: chunk, ephemeral: false });
       }
     });
@@ -59,8 +60,9 @@ const ChatGptCommand4_5 = new Command(
     const responseMessage = await chatGpt4_5(userMessage, guildId, channelId, userId);
     const discordMessage = `> ${ userMessage }\n${ responseMessage }`;
     const chunks = chunkSubstr(discordMessage, 1900);
-    chunks.forEach(async chunk => {
+    chunks.forEach(async (chunk, i) => {
       if (chunk != "") {
+        if (i > 0) await new Promise(r => setTimeout(r, 1 / 2 * 1000));
         await interaction.followUp({ content: chunk, ephemeral: false });
       }
     });
@@ -83,8 +85,9 @@ const ClassicChatCommand = new Command(
     const responseMessage = await classicChat(userMessage);
     const discordMessage = `> ${ userMessage }\n${ responseMessage }`;
     const chunks = chunkSubstr(discordMessage, 1900);
-    chunks.forEach(async chunk => {
+    chunks.forEach(async (chunk, i) => {
       if (chunk != "") {
+        if (i > 0) await new Promise(r => setTimeout(r, 1 / 2 * 1000));
         await interaction.followUp({ content: chunk, ephemeral: false });
       }
     });
