@@ -1,1 +1,1 @@
-export { token, openAIKey, guild } from '../../bot.json';
+export { token, openAIKey, guilds } from '../../bot.json';

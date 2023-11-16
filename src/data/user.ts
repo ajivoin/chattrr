@@ -13,7 +13,7 @@ class User {
   public getMessages(): Message[] {
     const msgsCopy = this.messages.slice();
     if (this.systemMessage) {
-      msgsCopy.unshift(new Message("system", this.systemMessage));
+      msgsCopy.unshift(new Message("", "system", this.systemMessage));
     }
     return msgsCopy;
   }

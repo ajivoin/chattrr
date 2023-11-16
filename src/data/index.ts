@@ -39,9 +39,9 @@ class Data {
     return this.getUser(guildId, channelId, userId).getMessages();
   }
 
-  public addMessage(guildId: string, channelId: string, userId: string, role: string, message: string): void {
+  public addMessage(model: string, guildId: string, channelId: string, userId: string, role: string, message: string): void {
     const user = this.getUser(guildId, channelId, userId);
-    user.messages.push(new Message(role, message));
+    user.messages.push(new Message(model, role, message));
   };
 
   public addSystemMessage(guildId: string, channelId: string, userId: string, message: string): void {

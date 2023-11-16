@@ -8,11 +8,11 @@ const configuration = new Configuration({
 
 const api = new OpenAIApi(configuration);
 
-const chat = async (message: string, guildId: string, channelId: string, userId: string): Promise<string> => {
-  Database.addMessage(guildId, channelId, userId, "user", message);
+const chatGpt4_5 = async (message: string, guildId: string, channelId: string, userId: string): Promise<string> => {
+  Database.addMessage("gpt-4.5", guildId, channelId, userId, "user", message);
   const res = await api.createChatCompletion({
     messages: Database.getRelevantMessages(guildId, channelId, userId).map(m => { return { role: m.role, content: m.content }; }) as ChatCompletionRequestMessage[],
-    model: "gpt-3.5-turbo-0301",
+    model: "gpt-4-1106-preview",
   });
   if (res.status != 200) {
     console.error(`OpenAI returned an error:`);
@@ -20,8 +20,40 @@ const chat = async (message: string, guildId: string, channelId: string, userId:
     return "";
   }
   const { content, role } = res.data.choices[0].message!;
-  Database.addMessage(guildId, channelId, userId, role, content);
+  Database.addMessage("gpt-4.5", guildId, channelId, userId, role, content);
   return content;
 };
 
-export { chat };
+const chatGpt3_5 = async (message: string, guildId: string, channelId: string, userId: string): Promise<string> => {
+  Database.addMessage("gpt-3.5", guildId, channelId, userId, "user", message);
+  const res = await api.createChatCompletion({
+    messages: Database.getRelevantMessages(guildId, channelId, userId).map(m => { return { role: m.role, content: m.content }; }) as ChatCompletionRequestMessage[],
+    model: "gpt-3.5-turbo-1106",
+  });
+  if (res.status != 200) {
+    console.error(`OpenAI returned an error:`);
+    console.error(res);
+    return "";
+  }
+  const { content, role } = res.data.choices[0].message!;
+  Database.addMessage("gpt-3.5", guildId, channelId, userId, role, content);
+  return content;
+};
+
+const classicChat = async (message: string, guildId: string, channelId: string, userId: string): Promise<string> => {
+  Database.addMessage("classic", guildId, channelId, userId, "user", message);
+  const res = await api.createChatCompletion({
+    model: "davinci",
+    messages: [],
+  });
+  if (res.status != 200) {
+    console.error(`OpenAI returned an error:`);
+    console.error(res);
+    return "";
+  }
+  const { content, role } = res.data.choices[0].message!;
+  Database.addMessage("classic", guildId, channelId, userId, role, content);
+  return content;
+};
+
+export { chatGpt3_5, chatGpt4_5, classicChat };
